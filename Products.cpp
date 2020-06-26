@@ -43,7 +43,7 @@ void Products::print(string article)
 {
 	auto p = find(article);
 	if (p != products.end())
-		cout << *p;
+		cout << *p << endl;
 	else
 		cout << "Товара с таким артикулом не существует." << endl;
 }
@@ -54,9 +54,13 @@ void Products::add()
 	cin >> new_product;
 
 	if (find(new_product.get_article()) != products.end())
-		cout << "Товар с таким артуклом уже существует!";
+		cout << "Товар с таким артуклом уже существует.";
 	else
+	{
 		products.insert(new_product);
+		system("cls");
+		cout << "Товар успешно добавлен." << endl << endl;
+	}
 }
 
 void Products::fill()
@@ -82,9 +86,22 @@ void Products::fill()
 
 		products.erase(p);
 		products.insert(new_product);
+
+		system("cls");
+		cout << "Товар успешно пополнен." << endl << endl;
 	}
 	else
 		cout << "Товара с таким артикулом не существует." << endl;
+}
+
+void Products::remove()
+{
+	string article;
+
+	cout << "Введите артикул товара для удаления: ";
+	cin >> article;
+
+	products.erase(find(article));
 }
 
 void Products::find() const
@@ -104,7 +121,7 @@ void Products::find() const
 	}
 }
 
-set<Product>::iterator Products::find(string article)
+set<Product>::iterator Products::find(string article) const
 {
 	set<Product>::iterator p = products.end();
 

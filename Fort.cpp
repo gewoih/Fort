@@ -40,7 +40,7 @@ int main()
 			}
 			case 4:
 			{
-				//list_of_products.remove();
+				list_of_products.remove();
 				break;
 			}
 			case 5:

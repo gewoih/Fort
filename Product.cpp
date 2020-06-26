@@ -29,11 +29,6 @@ void Product::set(string new_name, string new_article, int new_count)
 	count = new_count;
 }
 
-void Product::add(int c)
-{
-	count += c;
-}
-
 bool operator<(const Product& item1, const Product& item2)
 {
 	return item1.get_article() < item2.get_article();

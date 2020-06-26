@@ -19,6 +19,6 @@ public:
 	void fill();
 	void remove();
 	void find() const;
-	set<Product>::iterator find(string article);
+	set<Product>::iterator find(string article) const;
 };
 
