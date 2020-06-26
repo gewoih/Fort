@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include "Products.h"
 
 using namespace std;
 
@@ -6,7 +7,7 @@ int main()
 {
 	system("chcp 1251>nul");
 
-	//Products list_of_products;
+	Products list_of_products;
 
 	for (int menu;;)
 	{
@@ -24,17 +25,17 @@ int main()
 		{
 			case 1:
 			{
-				//list_of_products.print();
+				list_of_products.print();
 				break;
 			}
 			case 2:
 			{
-				//list_of_products.add();
+				list_of_products.add();
 				break;
 			}
 			case 3:
 			{
-				//list_of_products.fill();
+				list_of_products.fill();
 				break;
 			}
 			case 4:
@@ -44,7 +45,7 @@ int main()
 			}
 			case 5:
 			{
-				//list_of_products.find();
+				list_of_products.find();
 				break;
 			}
 			case 6:

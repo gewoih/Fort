@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="Fort.cpp" />
     <ClCompile Include="Product.cpp" />
+    <ClCompile Include="Products.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Product.h" />
+    <ClInclude Include="Products.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

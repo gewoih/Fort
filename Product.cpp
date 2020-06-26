@@ -3,15 +3,8 @@
 Product::Product()
 {
 	name = "";
+	article = "";
 	count = 0;
-	article = 0;
-}
-
-Product::Product(string new_name, int new_count, int new_article)
-{
-	name = new_name;
-	count = new_count;
-	article = new_article;
 }
 
 string Product::get_name() const
@@ -24,7 +17,24 @@ int Product::get_count() const
 	return count;
 }
 
-int Product::get_article() const
+string Product::get_article() const
 {
 	return article;
+}
+
+void Product::set(string new_name, string new_article, int new_count)
+{
+	name = new_name;
+	article = new_article;
+	count = new_count;
+}
+
+void Product::add(int c)
+{
+	count += c;
+}
+
+bool operator<(const Product& item1, const Product& item2)
+{
+	return item1.get_article() < item2.get_article();
 }
