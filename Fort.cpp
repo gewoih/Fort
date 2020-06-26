@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 #include "Products.h"
 
 using namespace std;
@@ -9,6 +10,8 @@ int main()
 
 	Products list_of_products;
 
+	list_of_products.open();
+
 	for (int menu;;)
 	{
 		cout << "1. Просмотр списка товаров" << endl;
@@ -16,7 +19,8 @@ int main()
 		cout << "3. Пополнение существующего товара" << endl;
 		cout << "4. Удаление товара" << endl;
 		cout << "5. Поиск по артикулу" << endl;
-		cout << "6. Выход из программы" << endl;
+		cout << "6. Сохранение данных" << endl;
+		cout << "7. Выход из программы" << endl;
 
 		cin >> menu;
 
@@ -49,6 +53,11 @@ int main()
 				break;
 			}
 			case 6:
+			{
+				list_of_products.save();
+				break;
+			}
+			case 7:
 			{
 				return 0;
 			}

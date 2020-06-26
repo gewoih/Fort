@@ -14,11 +14,14 @@ private:
 public:
 	void print() const;
 	void print(string article);
+	void create(string name, string article, int count);
 
 	void add();
 	void fill();
 	void remove();
 	void find() const;
+	void save() const;
+	void open();
 	set<Product>::iterator find(string article) const;
 };
 

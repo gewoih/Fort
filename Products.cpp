@@ -1,4 +1,5 @@
 #include "Products.h"
+#include <fstream>
 
 ostream& operator<<(ostream& stream, const Product& item)
 {
@@ -46,6 +47,11 @@ void Products::print(string article)
 		cout << *p << endl;
 	else
 		cout << "Товара с таким артикулом не существует." << endl;
+}
+
+void Products::create(string name, string article, int count)
+{
+	products.insert(Product(name, article, count));
 }
 
 void Products::add()
@@ -101,7 +107,10 @@ void Products::remove()
 	cout << "Введите артикул товара для удаления: ";
 	cin >> article;
 
-	products.erase(find(article));
+	if (find(article) != products.end())
+		products.erase(find(article));
+	else
+		cout << "Товара с таким артикулом не существует." << endl;
 }
 
 void Products::find() const
@@ -111,13 +120,53 @@ void Products::find() const
 	cout << "Введите артикул товара: ";
 	cin >> article;
 
-	for (auto item : products)
+	if (find(article) != products.end())
 	{
-		if (item.get_article() == article)
+		system("cls");
+		cout << "Найденная позиция:" << endl << *(find(article));
+	}
+	else
+		cout << "Товара с таким артикулом не существует." << endl;
+}
+
+void Products::save() const
+{
+	if (products.size())
+	{
+
+		ofstream save;
+
+		save.open("data.bin");
+
+		for (const auto& item : products)
+			save << item.get_article() << " " << item.get_name() << " " << item.get_count();
+
+		save.close();
+
+		cout << "Данные успешно сохранены." << endl << endl;
+	}
+	else
+		cout << "Нечего сохранять." << endl;
+}
+
+void Products::open()
+{
+	ifstream read("data.bin");
+	if (read.is_open())
+	{
+		string name, article;
+		int count;
+
+		while (read)
 		{
-			cout << item;
-			break;
+			getline(read, article, ' ');
+			getline(read, name, ' ');
+			read >> count;
+
+			create(name, article, count);
 		}
+
+		cout << "Данные успешно загружены." << endl << endl;
 	}
 }
 

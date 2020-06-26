@@ -7,6 +7,13 @@ Product::Product()
 	count = 0;
 }
 
+Product::Product(string new_name, string new_article, int new_count)
+{
+	name = new_name;
+	article = new_article;
+	count = new_count;
+}
+
 string Product::get_name() const
 {
 	return name;
