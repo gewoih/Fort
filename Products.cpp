@@ -66,6 +66,8 @@ void Products::add()
 		products.insert(new_product);
 		system("cls");
 		cout << "Товар успешно добавлен." << endl << endl;
+
+		save();
 	}
 }
 
@@ -83,9 +85,9 @@ void Products::fill()
 		cout << "Введите количество товара: ";
 		cin >> count;
 
-		new_name = (*p).get_name();
-		new_article = (*p).get_article();
-		new_count = (*p).get_count() + count;
+		new_name = p->get_name();
+		new_article = p->get_article();
+		new_count = p->get_count() + count;
 
 		Product new_product;
 		new_product.set(new_name, new_article, new_count);
@@ -95,6 +97,8 @@ void Products::fill()
 
 		system("cls");
 		cout << "Товар успешно пополнен." << endl << endl;
+
+		save();
 	}
 	else
 		cout << "Товара с таким артикулом не существует." << endl;
@@ -108,7 +112,10 @@ void Products::remove()
 	cin >> article;
 
 	if (find(article) != products.end())
+	{
 		products.erase(find(article));
+		save();
+	}
 	else
 		cout << "Товара с таким артикулом не существует." << endl;
 }
@@ -131,28 +138,21 @@ void Products::find() const
 
 void Products::save() const
 {
-	if (products.size())
-	{
+	ofstream save;
 
-		ofstream save;
+	save.open("data.bin");
 
-		save.open("data.bin");
+	for (const auto& item : products)
+		save << item.get_article() << " " << item.get_name() << " " << item.get_count();
 
-		for (const auto& item : products)
-			save << item.get_article() << " " << item.get_name() << " " << item.get_count();
-
-		save.close();
-
-		cout << "Данные успешно сохранены." << endl << endl;
-	}
-	else
-		cout << "Нечего сохранять." << endl;
+	save.close();
+	cout << "Данные успешно сохранены." << endl << endl;
 }
 
 void Products::open()
 {
 	ifstream read("data.bin");
-	if (read.is_open())
+	if (read.is_open() && read.peek() != EOF)
 	{
 		string name, article;
 		int count;
@@ -176,7 +176,7 @@ set<Product>::iterator Products::find(string article) const
 
 	for (auto i = products.begin(); i != products.end(); i++)
 	{
-		if ((*i).get_article() == article)
+		if (i->get_article() == article)
 		{
 			p = i;
 			break;
