@@ -40,7 +40,7 @@ void Products::print() const
 	}
 }
 
-void Products::print(string article)
+void Products::print(string article) const
 {
 	auto p = find(article);
 	if (p != products.end())
@@ -60,7 +60,7 @@ void Products::add()
 	cin >> new_product;
 
 	if (find(new_product.get_article()) != products.end())
-		cout << "Товар с таким артуклом уже существует.";
+		cout << "Товар с таким артикулом уже существует." << endl;
 	else
 	{
 		products.insert(new_product);
@@ -73,7 +73,7 @@ void Products::add()
 
 void Products::fill()
 {
-	string article, new_name, new_article;
+	string article, new_name;
 	int count, new_count;
 
 	cout << "Введите артикул товара: ";
@@ -85,12 +85,8 @@ void Products::fill()
 		cout << "Введите количество товара: ";
 		cin >> count;
 
-		new_name = p->get_name();
-		new_article = p->get_article();
-		new_count = p->get_count() + count;
-
 		Product new_product;
-		new_product.set(new_name, new_article, new_count);
+		new_product.set(p->get_name(), article, p->get_count() + count);
 
 		products.erase(p);
 		products.insert(new_product);
@@ -172,15 +168,13 @@ void Products::open()
 
 set<Product>::iterator Products::find(string article) const
 {
-	set<Product>::iterator p = products.end();
+	set<Product>::iterator p;
 
-	for (auto i = products.begin(); i != products.end(); i++)
-	{
-		if (i->get_article() == article)
+	p = find_if(products.begin(), products.end(), 
+		[&](const Product item) 
 		{
-			p = i;
-			break;
-		}
-	}
+			return item.get_article() == article;
+		});
+
 	return p;
 }

@@ -13,7 +13,7 @@ private:
 
 public:
 	void print() const;
-	void print(string article);
+	void print(string article) const;
 	void create(string name, string article, int count);
 
 	void add();
